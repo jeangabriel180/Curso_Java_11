@@ -1,0 +1,23 @@
+package br.com.geekuniversity.sessao18;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
+public class Programa43 {
+    public static void main(String[] args) {
+
+        try {
+            Scanner ler = new Scanner(new FileInputStream("entrada.txt"));
+
+            while (ler.hasNextLine()) {
+                String linha = ler.nextLine();
+                System.out.println(linha);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("n deu");
+        }
+
+
+    }
+}
