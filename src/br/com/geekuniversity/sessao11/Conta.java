@@ -38,8 +38,10 @@ public class Conta {
      *
      * @param valor a ser depositado
      */
-    public void depositar(float valor) {
+    public synchronized void depositar(float valor) {
         this.saldo = this.saldo + valor;
+
+        //syncronized(this){}
     }
 
     /**
