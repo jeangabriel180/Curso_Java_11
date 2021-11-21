@@ -1,5 +1,6 @@
 package br.com.geekuniversity.sessao21;
 
+import java.util.Objects;
 
 public class Aluno {
     private String nome;
@@ -13,8 +14,8 @@ public class Aluno {
     }
 
     @Override
-    public boolean equals(Object o) {
-        Aluno outro = (Aluno) o;
+    public boolean equals(Object obj) {
+        Aluno outro = (Aluno) obj;
         return outro.getNome().equals(this.nome);
     }
 

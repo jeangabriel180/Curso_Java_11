@@ -6,11 +6,28 @@ public class Vetor {
     private Aluno alunos[] = new Aluno[100];
     private int total = 0;
 
-    public void adiciona(int posicao, Aluno aluno) {
+    public void adiciona(Aluno aluno) {
+/*        for (int i = 0; i < alunos.length; i++) {
+            if (alunos[i] == null) {
+                alunos[i] = aluno;
+                break;
+            }
+ */
+        this.garantirEspaco();
+        this.alunos[total] = aluno;
+        total = total + 1;
+    }
+
+    public void adiciona(Aluno aluno, int posicao) {
+        this.garantirEspaco();
+        if (!posicaoOcupada(posicao))
+            throw new IllegalArgumentException("Posição inválida");
+
         for (int i = total - 1; i >= posicao; i -= 1) {
             alunos[i + 1] = alunos[i];
         }
-
+        alunos[posicao] = aluno;
+        total++;
     }
 
     public Aluno pega(int posicao) {
@@ -21,7 +38,9 @@ public class Vetor {
     }
 
     public void remove(int posicao) {
-        this.alunos[posicao] = null;
+        for (int i = posicao; i < this.total; i++) {
+            this.alunos[i] = this.alunos[i + 1];
+        }
     }
 
     public boolean contem(Aluno aluno) {
@@ -39,11 +58,20 @@ public class Vetor {
 
     @Override
     public String toString() {
-        //facilita a visuzalição do array
         return Arrays.toString(this.alunos);
     }
 
     private boolean posicaoOcupada(int posicao) {
         return posicao >= 0 && posicao < total;
+    }
+
+    private void garantirEspaco() {
+        if (total == alunos.length) {
+            Aluno novoArray[] = new Aluno[alunos.length * 2];
+            for (int i = 0; i < alunos.length; i++) {
+                novoArray[i] = alunos[i];
+            }
+            this.alunos = novoArray;
+        }
     }
 }
